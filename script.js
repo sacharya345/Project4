@@ -221,7 +221,6 @@ formMessage.classList.add("success");
 
 contactForm.reset();
 
-// Clear message after 5 seconds
 setTimeout(() => {
 formMessage.classList.remove("success");
 formMessage.textContent = "";
@@ -229,7 +228,6 @@ formMessage.textContent = "";
 
 } else {
 
-// Show error message
 formMessage.textContent = "✗ Please fill all fields.";
 formMessage.classList.remove("success");
 formMessage.classList.add("error");
