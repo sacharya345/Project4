@@ -40,8 +40,9 @@ return false;
 });
 });
 
-const heroImage = document.querySelector('.view-image');
-if (heroImage) {
+const heroImages = document.querySelectorAll('.view-image');
+if (heroImages.length > 0) {
+heroImages.forEach(heroImage => {
 heroImage.addEventListener('click', function(e) {
 e.preventDefault();
 e.stopPropagation();
@@ -52,6 +53,7 @@ document.getElementById('viewImage').src = imageSrc;
 imageViewModal.show();
 
 return false;
+});
 });
 }
 
