@@ -107,6 +107,22 @@ max-width:350px;
 border-radius:8px;
 }
 
+.hero-img.view-image{
+cursor:pointer;
+box-shadow:0 0 20px rgba(255, 61, 90, 0.3);
+transition:all 0.3s ease;
+}
+
+.hero-img.view-image:hover{
+transform:scale(1.05) translateY(-5px);
+box-shadow:0 0 40px rgba(255, 61, 90, 0.6), inset 0 0 20px rgba(255, 61, 90, 0.2);
+filter:brightness(1.1);
+}
+
+.hero-img.view-image:active{
+transform:scale(0.98);
+}
+
 .sub-title{
 color:#ff3d5a;
 letter-spacing:3px;

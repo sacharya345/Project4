@@ -16,6 +16,11 @@ backdrop: 'static',
 keyboard: false
 });
 
+const imageViewModal = new bootstrap.Modal(document.getElementById('imageViewModal'), {
+backdrop: true,
+keyboard: true
+});
+
 const viewProjectLinks = document.querySelectorAll('.view-project');
 
 viewProjectLinks.forEach(link => {
@@ -34,6 +39,32 @@ portfolioModal.show();
 return false;
 });
 });
+
+const heroImage = document.querySelector('.view-image');
+if (heroImage) {
+heroImage.addEventListener('click', function(e) {
+e.preventDefault();
+e.stopPropagation();
+
+const imageSrc = this.src;
+document.getElementById('viewImage').src = imageSrc;
+
+imageViewModal.show();
+
+return false;
+});
+}
+
+const imageViewElement = document.getElementById('imageViewModal');
+if (imageViewElement) {
+imageViewElement.addEventListener('hidden.bs.modal', function() {
+document.body.style.overflow = 'auto';
+});
+
+imageViewElement.addEventListener('show.bs.modal', function() {
+document.body.style.overflow = 'hidden';
+});
+}
 });
 
 const counters = document.querySelectorAll(".counter");
