@@ -392,6 +392,55 @@ position:relative;
 z-index:1;
 transition:all 0.3s ease;
 color:#ff3d5a;
+font-variant-numeric:tabular-nums;
+letter-spacing:2px;
+padding:10px 20px;
+background:rgba(255, 61, 90, 0.1);
+border:2px solid rgba(255, 61, 90, 0.3);
+border-radius:10px;
+text-shadow:0 0 10px rgba(255, 61, 90, 0.5);
+min-width:140px;
+display:inline-block;
+animation:counterPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes counterPulse {
+0%, 100% {
+box-shadow:0 0 10px rgba(255, 61, 90, 0.4), inset 0 0 10px rgba(255, 61, 90, 0.1);
+}
+50% {
+box-shadow:0 0 25px rgba(255, 61, 90, 0.7), inset 0 0 15px rgba(255, 61, 90, 0.2);
+}
+}
+
+@keyframes numberGlow {
+0% {
+text-shadow:0 0 5px rgba(255, 61, 90, 0.5);
+}
+50% {
+text-shadow:0 0 20px rgba(255, 61, 90, 0.9), 0 0 30px rgba(255, 61, 90, 0.6);
+}
+100% {
+text-shadow:0 0 5px rgba(255, 61, 90, 0.5);
+}
+}
+
+.counter-box h2.animating {
+animation:numberGlow 0.6s ease-in-out;
+}
+
+.counter-box:hover h2{
+background:rgba(255, 61, 90, 0.2);
+border-color:#ff3d5a;
+box-shadow:0 0 30px rgba(255, 61, 90, 0.8), inset 0 0 20px rgba(255, 61, 90, 0.3);
+scale:1.1;
+}
+
+.counter-box h2::after{
+content:'+';
+font-size:38px;
+margin-left:2px;
+vertical-align:top;
 }
 
 .counter-box p{
@@ -572,10 +621,6 @@ animation-delay:0.2s;
 animation-delay:0.3s;
 }
 
-.col-md-3:nth-child(4) .counter-box-animated {
-animation-delay:0.4s;
-}
-
 @media(max-width:991px){
 
 .hero-section{
@@ -604,11 +649,7 @@ font-size:36px;
 }
 
 .section-title h2{
-font-size:30px;
-}
-
-.counter-box h2{
-font-size:36px;
+font-size:28px;
 }
 
 }

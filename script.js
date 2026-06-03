@@ -10,7 +10,6 @@ navbar.classList.remove("scrolled");
 }
 });
 
-// Portfolio Modal Functionality
 window.addEventListener('load', function() {
 const portfolioModal = new bootstrap.Modal(document.getElementById('portfolioModal'), {
 backdrop: 'static',
@@ -38,33 +37,49 @@ return false;
 });
 
 const counters = document.querySelectorAll(".counter");
+let hasAnimated = false;
 
-const startCounter = () => {
-counters.forEach(counter => {
-const text = counter.innerText;
-const target = Number(text);
-let count = 0;
-const speed = target / 100;
-
-const updateCount = () => {
-
-if (count < target) {
-
-count += speed;
-counter.innerText = Math.ceil(count);
-
-requestAnimationFrame(updateCount);
-
-} else {
-
-counter.innerText = target + "+";
-
-}
-
+const formatNumber = (num) => {
+return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-updateCount();
+const startCounter = () => {
+if (hasAnimated) return;
+hasAnimated = true;
 
+counters.forEach(counter => {
+const target = Number(counter.innerText);
+counter.innerText = "0";
+const h2Element = counter.closest('h2');
+
+const duration = 2500;
+const startTime = Date.now();
+let lastValue = 0;
+
+const animate = () => {
+const elapsed = Date.now() - startTime;
+const progress = Math.min(elapsed / duration, 1);
+const easeOutQuad = 1 - (1 - progress) * (1 - progress);
+const current = Math.floor(target * easeOutQuad);
+
+if (current !== lastValue) {
+counter.innerText = formatNumber(current);
+h2Element.classList.add('animating');
+lastValue = current;
+
+setTimeout(() => {
+h2Element.classList.remove('animating');
+}, 100);
+}
+
+if (progress < 1) {
+requestAnimationFrame(animate);
+} else {
+counter.innerText = formatNumber(target);
+}
+};
+
+animate();
 });
 };
 
@@ -167,7 +182,6 @@ valid = false;
 
 if (valid) {
 
-// Show success message
 formMessage.textContent = "✓ Message Sent Successfully!";
 formMessage.classList.remove("error");
 formMessage.classList.add("success");
