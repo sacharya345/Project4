@@ -10,12 +10,39 @@ navbar.classList.remove("scrolled");
 }
 });
 
+// Portfolio Modal Functionality
+window.addEventListener('load', function() {
+const portfolioModal = new bootstrap.Modal(document.getElementById('portfolioModal'), {
+backdrop: 'static',
+keyboard: false
+});
+
+const viewProjectLinks = document.querySelectorAll('.view-project');
+
+viewProjectLinks.forEach(link => {
+link.addEventListener('click', function(e) {
+e.preventDefault();
+e.stopPropagation();
+
+const title = this.getAttribute('data-title');
+const description = this.getAttribute('data-description');
+
+document.getElementById('projectTitle').textContent = title;
+document.getElementById('projectDescription').textContent = description;
+
+portfolioModal.show();
+
+return false;
+});
+});
+});
+
 const counters = document.querySelectorAll(".counter");
 
 const startCounter = () => {
 counters.forEach(counter => {
-
-const target = Number(counter.getAttribute("data-target"));
+const text = counter.innerText;
+const target = Number(text);
 let count = 0;
 const speed = target / 100;
 
@@ -118,6 +145,7 @@ box.style.transform = "translateY(0)";
 });
 
 const contactForm = document.querySelector("form");
+const formMessage = document.getElementById("formMessage");
 
 if (contactForm) {
 
@@ -139,13 +167,25 @@ valid = false;
 
 if (valid) {
 
-alert("Message Sent Successfully!");
+// Show success message
+formMessage.textContent = "✓ Message Sent Successfully!";
+formMessage.classList.remove("error");
+formMessage.classList.add("success");
 
 contactForm.reset();
 
+// Clear message after 5 seconds
+setTimeout(() => {
+formMessage.classList.remove("success");
+formMessage.textContent = "";
+}, 5000);
+
 } else {
 
-alert("Please fill all fields.");
+// Show error message
+formMessage.textContent = "✗ Please fill all fields.";
+formMessage.classList.remove("success");
+formMessage.classList.add("error");
 
 }
 

@@ -31,22 +31,63 @@ padding:100px 0;
 .custom-nav{
 background:#090909;
 padding:15px 0;
+transition:all 0.3s ease;
+}
+
+.custom-nav.scrolled{
+background:rgba(9, 9, 9, 0.95);
+box-shadow:0 4px 15px rgba(0, 0, 0, 0.5);
+padding:10px 0;
 }
 
 .navbar-brand{
 font-size:30px;
 font-weight:700;
 letter-spacing:2px;
+transition:all 0.3s ease;
+position:relative;
+z-index:1;
+}
+
+.navbar-brand:hover{
+color:#ff3d5a;
+text-shadow:0 0 10px rgba(255, 61, 90, 0.8), 0 0 20px rgba(255, 61, 90, 0.6), 0 0 30px rgba(255, 61, 90, 0.4);
+animation:logoGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+0% { text-shadow:0 0 10px rgba(255, 61, 90, 0.8), 0 0 20px rgba(255, 61, 90, 0.6); }
+50% { text-shadow:0 0 20px rgba(255, 61, 90, 1), 0 0 30px rgba(255, 61, 90, 0.8), 0 0 40px rgba(255, 61, 90, 0.6); }
+100% { text-shadow:0 0 10px rgba(255, 61, 90, 0.8), 0 0 20px rgba(255, 61, 90, 0.6); }
 }
 
 .nav-link{
 color:#fff!important;
 margin-left:15px;
 font-size:17px;
+transition:all 0.3s ease;
+position:relative;
 }
 
 .nav-link:hover{
 color:#ff3d5a!important;
+text-shadow:0 0 10px rgba(255, 61, 90, 0.6), 0 0 20px rgba(255, 61, 90, 0.4);
+}
+
+.nav-link::after{
+content:'';
+position:absolute;
+bottom:-5px;
+left:0;
+width:0;
+height:2px;
+background:#ff3d5a;
+box-shadow:0 0 10px #ff3d5a;
+transition:width 0.3s ease;
+}
+
+.nav-link:hover::after{
+width:100%;
 }
 
 .hero-section{
@@ -198,48 +239,241 @@ margin-bottom:10px;
 .portfolio-content a{
 color:#ff3d5a;
 font-weight:600;
+cursor:pointer;
+transition:all 0.3s ease;
+text-decoration:underline;
+}
+
+.portfolio-content a:hover{
+text-shadow:0 0 10px rgba(255, 61, 90, 0.8);
+}
+
+.modal-header{
+background:#151515;
+border-bottom:2px solid #ff3d5a;
+}
+
+.modal-body{
+background:#090909;
+color:#fff;
+}
+
+.modal-title{
+color:#ff3d5a;
+font-weight:700;
+}
+
+.btn-close{
+filter:brightness(2);
 }
 
 .achievement-section{
 background:#0f0f0f;
 padding:100px 0;
+position:relative;
+overflow:hidden;
+}
+
+.achievement-section::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:radial-gradient(circle at 20% 50%, rgba(255, 61, 90, 0.05) 0%, transparent 50%), 
+            radial-gradient(circle at 80% 50%, rgba(255, 61, 90, 0.05) 0%, transparent 50%);
+pointer-events:none;
+}
+
+.achievement-subtitle{
+color:#888;
+font-size:16px;
+margin-top:15px;
+letter-spacing:0.5px;
 }
 
 .counter-box{
 background:#151515;
 padding:40px 20px;
+transition:all 0.4s ease;
+position:relative;
+overflow:hidden;
+border:1px solid transparent;
+z-index:1;
 }
 
-.counter-box i{
+.counter-box::before{
+content:'';
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:100%;
+background:linear-gradient(90deg, transparent, rgba(255, 61, 90, 0.3), transparent);
+transition:left 0.5s ease;
+z-index:0;
+}
+
+.counter-box-animated{
+background:linear-gradient(135deg, #151515 0%, #1a1a1a 100%);
+border:1px solid rgba(255, 61, 90, 0.1);
+}
+
+.counter-box:hover{
+transform:translateY(-15px);
+border-color:#ff3d5a;
+box-shadow:0 10px 40px rgba(255, 61, 90, 0.4);
+}
+
+.counter-box:hover::before{
+left:100%;
+}
+
+.counter-icon{
 font-size:45px;
 color:#ff3d5a;
 margin-bottom:20px;
+transition:all 0.3s ease;
+position:relative;
+z-index:1;
+text-shadow:0 0 10px rgba(255, 61, 90, 0.5);
+}
+
+.counter-box:hover .counter-icon{
+font-size:55px;
+text-shadow:0 0 20px rgba(255, 61, 90, 0.8);
+transform:scale(1.2);
+}
+
+.counter-info{
+position:relative;
+z-index:1;
+}
+
+.progress-ring{
+position:relative;
+display:inline-block;
+margin:15px 0;
+width:100px;
+height:100px;
+}
+
+.ring-svg{
+transform:rotate(-90deg);
+}
+
+.ring-circle{
+fill:none;
+stroke:#222;
+stroke-width:3;
+stroke-linecap:round;
+}
+
+.ring-progress{
+fill:none;
+stroke:#ff3d5a;
+stroke-width:3;
+stroke-linecap:round;
+stroke-dasharray:283;
+stroke-dashoffset:calc(283 - (283 * var(--progress)) / 100);
+transition:stroke-dashoffset 2s ease;
+filter:drop-shadow(0 0 8px rgba(255, 61, 90, 0.6));
+}
+
+.counter-box:hover .ring-progress{
+filter:drop-shadow(0 0 15px rgba(255, 61, 90, 1));
 }
 
 .counter-box h2{
 font-size:50px;
-margin-bottom:10px;
+margin:10px 0 5px;
+position:relative;
+z-index:1;
+transition:all 0.3s ease;
+color:#ff3d5a;
 }
 
 .counter-box p{
 color:#c4c4c4;
+position:relative;
+z-index:1;
+margin:0;
+font-weight:600;
+}
+
+.achievement-desc{
+font-size:13px;
+color:#888;
+font-weight:400;
+margin-top:8px!important;
+letter-spacing:0.5px;
 }
 
 .form-control{
 background:#151515;
-border:none;
+border:1px solid #333;
 color:#fff;
 padding:15px;
+transition:all 0.3s ease;
+}
+
+.form-control::placeholder{
+color:#888;
 }
 
 .form-control:focus{
-background:#151515;
+background:#1a1a1a;
 color:#fff;
-box-shadow:none;
+box-shadow:0 0 15px rgba(255, 61, 90, 0.5);
+border-color:#ff3d5a!important;
 }
 
 textarea{
 resize:none;
+transition:all 0.3s ease;
+}
+
+textarea:focus{
+box-shadow:0 0 15px rgba(255, 61, 90, 0.5);
+border:1px solid #ff3d5a!important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus{
+box-shadow:0 0 15px rgba(255, 61, 90, 0.5);
+border:1px solid #ff3d5a!important;
+}
+
+.theme-btn{
+transition:all 0.3s ease;
+box-shadow:0 4px 15px rgba(255, 61, 90, 0.3);
+}
+
+.theme-btn:hover{
+box-shadow:0 6px 25px rgba(255, 61, 90, 0.6);
+transform:translateY(-2px);
+}
+
+.form-message{
+padding:15px;
+border-radius:4px;
+margin-bottom:20px;
+display:none;
+}
+
+.form-message.success{
+background:#1a4d2e;
+color:#4ade80;
+border-left:4px solid #4ade80;
+display:block;
+}
+
+.form-message.error{
+background:#4d1a1a;
+color:#ff6b6b;
+border-left:4px solid #ff6b6b;
+display:block;
 }
 
 footer{
@@ -298,6 +532,48 @@ margin:40px 0 20px;
 .copyright{
 text-align:center;
 color:#888;
+}
+
+@keyframes fadeInUp {
+0% {
+opacity:0;
+transform:translateY(30px);
+}
+100% {
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes scaleIn {
+0% {
+opacity:0;
+transform:scale(0.8);
+}
+100% {
+opacity:1;
+transform:scale(1);
+}
+}
+
+.counter-box-animated {
+animation:fadeInUp 0.6s ease-out forwards;
+}
+
+.col-md-3:nth-child(1) .counter-box-animated {
+animation-delay:0.1s;
+}
+
+.col-md-3:nth-child(2) .counter-box-animated {
+animation-delay:0.2s;
+}
+
+.col-md-3:nth-child(3) .counter-box-animated {
+animation-delay:0.3s;
+}
+
+.col-md-3:nth-child(4) .counter-box-animated {
+animation-delay:0.4s;
 }
 
 @media(max-width:991px){
